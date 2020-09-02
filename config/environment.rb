@@ -1,14 +1,14 @@
 require 'sqlite3'
 
 
-DB = {:conn => SQLite3::Database.new("db/songs.db")}
+DB = {:conn => SQLite3::Database.new("db/users.db")}
 DB[:conn].execute("DROP TABLE IF EXISTS songs")
 
 sql = <<-SQL
-  CREATE TABLE IF NOT EXISTS songs (
+  CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY,
   name TEXT,
-  album TEXT
+  password TEXT
   )
 SQL
 

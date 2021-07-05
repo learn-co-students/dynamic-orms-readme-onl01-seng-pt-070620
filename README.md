@@ -215,11 +215,20 @@ We can tell our `Song` class that it should have an `attr_accessor` named after 
 ```ruby
 class Song
   def self.table_name
-    #table_name code
+    self.to_s.downcase.pluralizee
   end
 
   def self.column_names
-    #column_names code
+    DB[:conn].results_as_hash = true
+
+    sql = "pragma table_info('#{table_name}')"
+
+    table_info = DB[:conn].execute(sql)
+    column_names = []
+    table_info.each do |row|
+      column_names << row["name"]
+    end
+    column_names.compact
   end
 
   self.column_names.each do |col_name|

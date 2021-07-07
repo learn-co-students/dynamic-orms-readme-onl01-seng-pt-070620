@@ -1,8 +1,8 @@
 require_relative "../config/environment.rb"
 require 'active_support/inflector'
+require 'pry'
 
 class Song
-
 
   def self.table_name
     self.to_s.downcase.pluralize
@@ -15,8 +15,8 @@ class Song
 
     table_info = DB[:conn].execute(sql)
     column_names = []
-    table_info.each do |row|
-      column_names << row["name"]
+    table_info.each do |column|
+      column_names << column["name"]
     end
     column_names.compact
   end
